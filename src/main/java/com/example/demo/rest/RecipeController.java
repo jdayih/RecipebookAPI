@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,17 +37,22 @@ public class RecipeController {
 
 	@GetMapping("/getRecipes")
 	public ResponseEntity<List<Recipe>> getRecipe() {
-		return ResponseEntity.ok(this.recipes);
+		return ResponseEntity.ok(this.service.getRecipes());
 	}
 
 	@GetMapping("/getRecipeById/{id}")
-	public Recipe getRecipeById(@PathVariable int id) {
-		return this.recipes.get(id);
+	public Recipe getRecipeById(@PathVariable long id) {
+		return this.service.getRecipeById(id);
 	}
 
 	@DeleteMapping("/removeRecipe/{id}")
-	public Recipe removeRecipe(@PathVariable int id) {
-		return this.recipes.remove(id);
+	public boolean removeRecipe(@PathVariable long id) {
+		return this.service.removeRecipe(id);
+	}
+
+	@PutMapping("/updateRecipe/{id")
+	public Recipe updateRecipe(@PathVariable Long id, @RequestBody Recipe newRecipe) {
+		return this.service.updateRecipe(id, newRecipe);
 	}
 
 }

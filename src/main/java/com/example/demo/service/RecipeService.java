@@ -6,7 +6,7 @@ import com.example.demo.domain.Recipe;
 
 public interface RecipeService {
 
-	Recipe createChicken(Recipe chicken);
+	Recipe createRecipe(Recipe recipe);
 
 	List<Recipe> getRecipes();
 
@@ -15,7 +15,5 @@ public interface RecipeService {
 	boolean removeRecipe(Long id);
 
 	Recipe updateRecipe(Long id, Recipe newRecipe);
-
-	Recipe getRecipeByName(String name);
 
 }
