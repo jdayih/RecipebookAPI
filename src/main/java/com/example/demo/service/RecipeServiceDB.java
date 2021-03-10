@@ -12,18 +12,17 @@ public class RecipeServiceDB implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getRecipe() {
+	public List<Recipe> getRecipes() {
 		return null;
 	}
 
 	@Override
-	public Recipe getRecipeById(long id) {
+	public Recipe getRecipeById(int id) {
 		return null;
 	}
 
 	@Override
-	public Recipe removeRecipe(long id) {
-		return null;
+	public void removeRecipe(int id) {
 	}
 
 }

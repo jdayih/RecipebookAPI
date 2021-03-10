@@ -10,7 +10,7 @@ public interface RecipeService {
 
 	List<Recipe> getRecipes();
 
-	Recipe getRecipeById(Long id);
+	Recipe getRecipeById(int id);
 
-	boolean removeRecipe(Long id);
+	void removeRecipe(int id);
 }
