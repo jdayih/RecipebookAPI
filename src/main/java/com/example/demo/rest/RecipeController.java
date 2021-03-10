@@ -13,11 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Recipe;
+import com.example.demo.service.RecipeService;
 
 @RestController
 public class RecipeController {
 
 	private List<Recipe> recipes = new ArrayList<>();
+
+	private RecipeService service;
+
+	public RecipeController(RecipeService service) {
+		super();
+		this.service = service;
+	}
 
 	@PostMapping("/createRecipe")
 	public ResponseEntity<Recipe> createPenguin(@RequestBody Recipe recipe) {
