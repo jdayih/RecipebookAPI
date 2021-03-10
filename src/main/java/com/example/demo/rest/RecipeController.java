@@ -3,6 +3,8 @@ package com.example.demo.rest;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +20,15 @@ public class RecipeController {
 	private List<Recipe> recipes = new ArrayList<>();
 
 	@PostMapping("/createRecipe")
-	public void createRecipe(@RequestBody Recipe recipe) {
+	public ResponseEntity<Recipe> createPenguin(@RequestBody Recipe recipe) {
 		this.recipes.add(recipe);
+		Recipe added = this.recipes.get(this.recipes.size() - 1);
+		return new ResponseEntity<Recipe>(added, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getRecipes")
-	public List<Recipe> getRecipes() {
-		return this.recipes;
+	public ResponseEntity<List<Recipe>> getRecipe() {
+		return ResponseEntity.ok(this.recipes);
 	}
 
 	@GetMapping("/getRecipeById/{id}")
