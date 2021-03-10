@@ -1,6 +1,5 @@
 package com.example.demo.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -13,32 +12,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Recipe;
+import com.example.demo.service.RecipeService;
 
 @RestController
 public class RecipeController {
 
-	private List<Recipe> recipes = new ArrayList<>();
+	private RecipeService service;
+
+	public RecipeController(RecipeService service) {
+		super();
+		this.service = service;
+	}
 
 	@PostMapping("/createRecipe")
 	public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
-		this.recipes.add(recipe);
-		Recipe added = this.recipes.get(this.recipes.size() - 1);
-		return new ResponseEntity<Recipe>(added, HttpStatus.CREATED);
+		return new ResponseEntity<Recipe>(this.service.createRecipe(recipe), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getRecipes")
 	public ResponseEntity<List<Recipe>> getRecipes() {
-		return ResponseEntity.ok(this.recipes);
+		return ResponseEntity.ok(this.service.getRecipes());
 	}
 
 	@GetMapping("/getRecipeById/{id}")
-	public Recipe getRecipeById(@PathVariable int id) {
-		return this.recipes.get(id);
+	public Recipe getPenguinById(@PathVariable int id) {
+		return this.service.getRecipeById(id);
 	}
 
 	@DeleteMapping("/removeRecipe/{id}")
-	public Recipe removeRecipe(@PathVariable int id) {
-		return this.recipes.remove(id);
+	public void removePenguin(@PathVariable int id) {
+		this.service.removeRecipe(id);
 	}
 
 }
