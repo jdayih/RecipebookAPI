@@ -45,6 +45,15 @@ public class RecipeServiceDBUnitTest {
 	}
 
 	@Test
+	void testGetById() {
+		Recipe newRecipe = new Recipe("Spaghetti", 380, 45, 4);
+		Recipe savedRecipe = new Recipe(1L, "Spaghetti", 380, 45, 4);
+		Mockito.when(this.repo.findById(savedRecipe.getId())).thenReturn(Optional.of(savedRecipe));
+		assertThat(this.service.getRecipeById(savedRecipe.getId())).isEqualTo(savedRecipe);
+		Mockito.verify(this.repo, Mockito.times(1)).findById(savedRecipe.getId());
+	}
+
+	@Test
 	void testCreate() {
 		Recipe newRecipe = new Recipe("Spaghetti", 380, 45, 4);
 		Recipe savedRecipe = new Recipe(1L, "Spaghetti", 380, 45, 4);
