@@ -17,8 +17,8 @@ public class RecipeServiceList implements RecipeService {
 	}
 
 	@Override
-	public Recipe createRecipe(Recipe penguin) {
-		this.recipes.add(penguin);
+	public Recipe createRecipe(Recipe recipe) {
+		this.recipes.add(recipe);
 		Recipe added = this.recipes.get(this.recipes.size() - 1);
 		return added;
 	}
