@@ -1,6 +1,5 @@
 package com.example.demo.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -19,8 +18,6 @@ import com.example.demo.service.RecipeService;
 @RestController
 public class RecipeController {
 
-	private List<Recipe> recipes = new ArrayList<>();
-
 	private RecipeService service;
 
 	public RecipeController(RecipeService service) {
@@ -30,9 +27,7 @@ public class RecipeController {
 
 	@PostMapping("/createRecipe")
 	public ResponseEntity<Recipe> createPenguin(@RequestBody Recipe recipe) {
-		this.recipes.add(recipe);
-		Recipe added = this.recipes.get(this.recipes.size() - 1);
-		return new ResponseEntity<Recipe>(added, HttpStatus.CREATED);
+		return new ResponseEntity<Recipe>(this.service.createRecipe(recipe), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getRecipes")
@@ -50,7 +45,7 @@ public class RecipeController {
 		return this.service.removeRecipe(id);
 	}
 
-	@PutMapping("/updateRecipe/{id")
+	@PutMapping("/updateRecipe/{id}")
 	public Recipe updateRecipe(@PathVariable Long id, @RequestBody Recipe newRecipe) {
 		return this.service.updateRecipe(id, newRecipe);
 	}
